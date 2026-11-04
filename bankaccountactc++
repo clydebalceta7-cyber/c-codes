@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BankAccount {
+public:
+    int balance;
+    string owner;
+    void deposit(int amount){
+        balance += amount;
+        cout << "Deposited: " << amount << endl;
+    };
+    void withdraw(int amount){
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Withdrew: " << amount << endl;
+        } else {
+            cout << "Insufficient funds!" << endl;
+        }
+    }
+    int getBalance(){
+        return balance;
+    };
+    int calculateInterest(double interestRate){
+        balance -= balance * interestRate;
+        return balance;
+    };
+
+};
+
+int main() {
+    BankAccount account1, account2;
+
+    account1.owner = "Alice";
+    account1.balance=10000;
+    account2.owner = "Bob";
+    account2.balance=5000;
+
+    account1.deposit(5000);
+    account1.withdraw(3000);
+    account1.deposit(2000);
+    account1.withdraw(4000);
+    cout << "Current balance for " << account1.owner << ": " << account1.getBalance() << endl;
+    account1.calculateInterest(0.05);
+    cout << "Balance after interest for " << account1.owner << ": " << account1.getBalance() << endl;
+    return 0;
+};
